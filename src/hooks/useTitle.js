@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 
 export const useTitle = title => {
   const documentDefined = typeof document !== 'undefined'
-  const originalTitle = useRef(documentDefined ? document.title : null)
+  const originalTitle = useRef(documentDefined ? document.title : '')
 
   useEffect(() => {
     if (!documentDefined) return

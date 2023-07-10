@@ -4,11 +4,14 @@ import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './router'
 import { AppTheme } from './theme/Apptheme'
+import { ChangeFavicon } from './components/ChangeFavicon'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AppTheme>
-      <RouterProvider router={router} />
-    </AppTheme>
+    <ChangeFavicon>
+      <AppTheme>
+        <RouterProvider router={router} />
+      </AppTheme>
+    </ChangeFavicon>
   </React.StrictMode>
 )
