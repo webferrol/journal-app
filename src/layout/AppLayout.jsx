@@ -1,7 +1,11 @@
 import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
+import { Outlet } from 'react-router-dom'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 
-export function JournalApp () {
+export function AppLayout () {
   return (
     <Grid
       container
@@ -13,7 +17,7 @@ export function JournalApp () {
         backgroundColor: 'primary.main'
       }}
     >
-      <Typography variant='h4' element='h1' gutterBottom>JournalApp</Typography>
+      <Outlet />
     </Grid>
   )
 }
