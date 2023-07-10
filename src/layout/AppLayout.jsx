@@ -14,6 +14,7 @@ export function AppLayout () {
       alignItems='center'
       sx={{
         minHeight: '100vh',
+        padding: '1rem',
         backgroundColor: 'primary.main'
       }}
     >

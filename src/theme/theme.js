@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles'
-import { red } from '@mui/material/colors'
+import red from '@mui/material/colors/red'
 
 // Create a theme instance.
 export const theme = createTheme({

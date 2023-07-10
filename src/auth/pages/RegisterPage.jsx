@@ -21,7 +21,6 @@ export function RegisterPage () {
       <Grid xs={12}>
         <TextField
           placeholder='info@webferrol.com'
-          autoFocus
           type='email'
           helperText='Su correo electrónico'
           fullWidth

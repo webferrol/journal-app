@@ -8,11 +8,11 @@ export const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       {
-        path: 'auth/login',
+        path: 'auth/*',
         element: <LoginPage />
       },
       {
-        path: 'auth/*',
+        path: 'auth/login',
         element: <LoginPage />
       },
       {

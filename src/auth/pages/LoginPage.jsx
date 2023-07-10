@@ -6,8 +6,10 @@ import Link from '@mui/material/Link'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { AuthLayout } from '../layout/AuthLayout'
+import { useTitle } from '../../hooks/useTitle'
 
 export function LoginPage () {
+  useTitle('Login')
   return (
     <AuthLayout title='Login'>
       <Grid xs={12} md={6}>
