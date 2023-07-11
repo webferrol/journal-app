@@ -1,26 +1,24 @@
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
+import Toolbar from '@mui/material/Toolbar'
 import { Outlet } from 'react-router-dom'
 import { NavBar } from '../components/NavBar'
+import { SideBar } from '../components/SideBar'
 
 export function AppLayout () {
   return (
     <Grid
       container
-      sx={{
-        minHeight: '100vh',
-        alignItems: 'start'
-      }}
+      alignItems='start'
     >
-      {/* Navbar */}
       <NavBar drawerWidth={240} />
-
-      {/* Sidebar */}
-
+      {/* NavBar position: fixed */}
+      <SideBar drawerWidth={240} />
       <Box
         component='main'
-        sx={{ flexGrow: 1, p: 3 }}
+        sx={{ flexGrow: 1, p: 3, ml: '240px' }}
       >
+        <Toolbar />
         <Outlet />
       </Box>
     </Grid>
