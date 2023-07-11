@@ -1,3 +1,4 @@
+import AccountCircle from '@mui/icons-material/AccountCircle'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Grid from '@mui/material/Grid'
@@ -5,7 +6,6 @@ import IconButton from '@mui/material/IconButton'
 import MenuOutlined from '@mui/icons-material/MenuOutlined'
 import Typography from '@mui/material/Typography'
 import PropTypes from 'prop-types'
-import LoginOutlined from '@mui/icons-material/LoginOutlined'
 
 export function NavBar ({ drawerWidth = 240 }) {
   return (
@@ -28,11 +28,14 @@ export function NavBar ({ drawerWidth = 240 }) {
           <MenuOutlined />
         </IconButton>
         <Grid container alignItems='center' justifyContent='space-between'>
-          <Typography>
+          <Typography
+            variant='h6'
+            component='div'
+          >
             Webferrol
           </Typography>
           <IconButton color='inherit'>
-            <LoginOutlined />
+            <AccountCircle />
           </IconButton>
         </Grid>
       </Toolbar>
