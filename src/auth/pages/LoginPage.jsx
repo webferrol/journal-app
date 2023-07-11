@@ -1,17 +1,17 @@
-import Button from '@mui/material/Button'
 import { Link as RouterLink } from 'react-router-dom'
+import { useTitle } from '../../hooks/useTitle'
+import Button from '@mui/material/Button'
 import GitHub from '@mui/icons-material/GitHub'
 import Grid from '@mui/material/Unstable_Grid2'
 import Link from '@mui/material/Link'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import { AuthLayout } from '../layout/AuthLayout'
-import { useTitle } from '../../hooks/useTitle'
+import { FormLayout } from '../layout/FormLayout'
 
 export function LoginPage () {
   useTitle('Login')
   return (
-    <AuthLayout title='Login'>
+    <FormLayout title='Login'>
       <Grid xs={12} md={6}>
         <TextField
           placeholder='info@webferrol.com'
@@ -48,6 +48,6 @@ export function LoginPage () {
       <Grid>
         <Link component={RouterLink} to='/auth/register'>Registro</Link>
       </Grid>
-    </AuthLayout>
+    </FormLayout>
   )
 }
