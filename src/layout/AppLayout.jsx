@@ -17,7 +17,7 @@ export function AppLayout () {
       <SideBar drawerWidth={240} />
       <Box
         component='main'
-        sx={{ flexGrow: 1, p: 3, ml: '240px' }}
+        sx={{ flexGrow: 1, p: 3 }}
       >
         <Toolbar />
         <Outlet />
