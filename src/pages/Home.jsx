@@ -1,4 +1,4 @@
-import { NothingSelectedView } from "../views/NothingSelectedView";
+import { NothingSelectedView } from '../views/NothingSelectedView'
 
 export function Home () {
   return (

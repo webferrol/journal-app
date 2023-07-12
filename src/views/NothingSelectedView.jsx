@@ -1,4 +1,4 @@
-import ProTip from "../components/ProTip";
+import ProTip from '../components/ProTip'
 
 export function NothingSelectedView () {
   return (
