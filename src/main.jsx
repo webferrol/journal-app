@@ -1,21 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './router'
 import { AppTheme } from './theme/Apptheme'
 import { FaviconVisilityChange } from './components/FaviconVisilityChange'
-import '@fontsource/roboto/300.css'
-import '@fontsource/roboto/400.css'
-import '@fontsource/roboto/500.css'
-import '@fontsource/roboto/700.css'
+import { Provider } from 'react-redux'
+import { store } from './store'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <FaviconVisilityChange>
-      <AppTheme>
-        <RouterProvider router={router} />
-      </AppTheme>
+      <Provider store={store}>
+        <AppTheme>
+          <RouterProvider router={router} />
+        </AppTheme>
+      </Provider>
     </FaviconVisilityChange>
   </React.StrictMode>
 )
