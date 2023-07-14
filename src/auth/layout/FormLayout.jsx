@@ -6,10 +6,11 @@ import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import PropTypes from 'prop-types'
 
-export function FormLayout ({ title, children }) {
+export function FormLayout ({ title, children, onSubmit }) {
   return (
     <Box maxWidth='50ch' sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
       <Grid
+        onSubmit={onSubmit}
         component='form'
         container
         sx={{ backgroundColor: 'white', p: 2, maxWidth: 'sm', borderRadius: 2 }}
@@ -28,5 +29,6 @@ export function FormLayout ({ title, children }) {
 
 FormLayout.propTypes = {
   children: PropTypes.node,
-  title: PropTypes.string
+  title: PropTypes.string,
+  onSubmit: PropTypes.func
 }

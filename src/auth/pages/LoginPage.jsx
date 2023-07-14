@@ -1,22 +1,40 @@
+import { useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import { useTitle } from '../../hooks/useTitle'
 import Button from '@mui/material/Button'
-import GitHub from '@mui/icons-material/GitHub'
+import Google from '@mui/icons-material/Google'
 import Grid from '@mui/material/Unstable_Grid2'
 import Link from '@mui/material/Link'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { FormLayout } from '../layout/FormLayout'
+import { checkingAuthentication, startSignInWithGoogle } from '../slices'
+import { AUTH_STATUS } from '../../constants'
 
 export function LoginPage () {
+  const dispatch = useDispatch()
+  const { status } = useSelector(state => state.auth)
+  const isAuthenticated = useMemo(() => status === AUTH_STATUS.authAuthenticated, [status])
   useTitle('Login')
+  const handleSubmit = e => {
+    e.preventDefault()
+    const formData = new FormData(e.target)
+    const { email, password } = Object.fromEntries(formData.entries())
+    dispatch(checkingAuthentication({ email, password }))
+  }
+  const handleGoogle = () => {
+    dispatch(startSignInWithGoogle())
+  }
   return (
-    <FormLayout title='Login'>
+    <FormLayout title='Login' onSubmit={handleSubmit}>
       <Grid xs={12} md={6}>
         <TextField
           placeholder='info@webferrol.com'
           autoFocus
           type='email'
+          name='email'
+          required
           helperText='Su correo electrónico'
           fullWidth
         />
@@ -24,6 +42,8 @@ export function LoginPage () {
       <Grid xs={12} md={6}>
         <TextField
           type='password'
+          name='password'
+          required
           helperText='Contraseña de acceso'
           fullWidth
         />
@@ -32,6 +52,8 @@ export function LoginPage () {
         <Button
           fullWidth
           variant='contained'
+          type='submit'
+          disabled={isAuthenticated}
         >
           Login
         </Button>
@@ -40,9 +62,12 @@ export function LoginPage () {
         <Button
           fullWidth
           variant='contained'
+          type='button'
+          onClick={handleGoogle}
+          disabled={isAuthenticated}
         >
-          <GitHub />
-          <Typography sx={{ ml: 1 }}>Github</Typography>
+          <Google />
+          <Typography sx={{ ml: 1 }}>Google</Typography>
         </Button>
       </Grid>
       <Grid>
