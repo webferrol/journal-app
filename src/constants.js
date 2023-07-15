@@ -4,11 +4,6 @@ export const AUTH_STATUS = {
   authAuthenticated: 'authenticated'
 }
 
-export const ERRORS = {
-  'auth/popup-closed-by-user': 'Ventana modal cerrada por el usuario',
-  undefined: 'Error desconocido'
-}
-
 export const AUTH_INITIAL_STATE = {
   status: AUTH_STATUS.authNotAuthenticated,
   errorMessage: '',
@@ -18,4 +13,15 @@ export const AUTH_INITIAL_STATE = {
     displayName: '',
     photoURL: ''
   }
+}
+
+export const ERRORS = {
+  'auth/popup-closed-by-user': 'Ventana modal cerrada por el usuario',
+  undefined: 'Error desconocido'
+}
+
+export const FORM_VALIDATE = {
+  displayName: { fn: (value) => (!value.trim().length), message: 'Este campo es obligatorio' },
+  password: { fn: (value) => (value.trim().length < 6), message: 'Por lo menos 6 caracteres' },
+  email: { fn: (value) => !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value), message: 'Correo electrónico no válido' }
 }
