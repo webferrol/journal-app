@@ -6,8 +6,11 @@ import IconButton from '@mui/material/IconButton'
 import MenuOutlined from '@mui/icons-material/MenuOutlined'
 import Typography from '@mui/material/Typography'
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { signOut } from '../auth/slices'
 
 export function NavBar ({ drawerWidth = 240 }) {
+  const dispatch = useDispatch()
   return (
     <AppBar
       position='fixed'
@@ -34,7 +37,7 @@ export function NavBar ({ drawerWidth = 240 }) {
           >
             Webferrol
           </Typography>
-          <IconButton color='inherit'>
+          <IconButton color='inherit' onClick={() => dispatch(signOut())}>
             <AccountCircle />
           </IconButton>
         </Grid>

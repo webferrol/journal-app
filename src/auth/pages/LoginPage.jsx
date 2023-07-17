@@ -10,7 +10,7 @@ import Link from '@mui/material/Link'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { FormLayout } from '../layout/FormLayout'
-import { checkingAuthentication, signInWithPopup } from '../slices'
+import { signInWithPopup, signInWithEmailAndPassword } from '../slices'
 import { AUTH_STATUS } from '../../constants'
 
 export function LoginPage () {
@@ -22,7 +22,7 @@ export function LoginPage () {
     e.preventDefault()
     const formData = new FormData(e.target)
     const { email, password } = Object.fromEntries(formData.entries())
-    dispatch(checkingAuthentication({ email, password }))
+    dispatch(signInWithEmailAndPassword(email, password))
   }
   const handleGoogle = () => {
     dispatch(signInWithPopup())

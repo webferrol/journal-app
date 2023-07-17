@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
+
 import PropTypes from 'prop-types'
+import { useOnAuthStateChanged } from '../auth/hooks/useOnAuthStateChanged'
 
 const icon = document.querySelector('link[rel=icon]')
 
@@ -11,16 +13,19 @@ function handleVisibilityChange (e) {
   )
 }
 
-export function FaviconVisilityChange ({ children }) {
+export function OnLoadComponents ({ children }) {
+  useOnAuthStateChanged()
+
   useEffect(() => {
     if (icon) window.addEventListener('visibilitychange', handleVisibilityChange)
     return () => {
       window.removeEventListener('visibilitychange', handleVisibilityChange)
     }
   }, [])
+
   return children
 }
 
-FaviconVisilityChange.propTypes = {
+OnLoadComponents.propTypes = {
   children: PropTypes.node
 }

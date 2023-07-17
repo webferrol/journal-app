@@ -5,11 +5,6 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: AUTH_INITIAL_STATE,
   reducers: {
-    reset: (state) => {
-      state.status = AUTH_INITIAL_STATE.status
-      state.user = AUTH_INITIAL_STATE.user
-      state.errorMessage = AUTH_INITIAL_STATE.errorMessage
-    },
     setStatus: (state, action) => {
       state.status = action.payload // Estado del usuario durante el logueo
     },
