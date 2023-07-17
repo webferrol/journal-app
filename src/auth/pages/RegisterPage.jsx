@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useMemo, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
+import Alert from '@mui/material/Alert'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Unstable_Grid2'
 import Link from '@mui/material/Link'
@@ -7,19 +9,23 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { useForm } from '../../hooks/useForm'
 import { FormLayout } from '../layout/FormLayout'
-import { FORM_VALIDATE } from '../../constants'
+import { AUTH_STATUS, FORM_VALIDATE } from '../../constants'
+import { createUserWithEmailPassword } from '../slices/thunks'
 
 export function RegisterPage () {
   const { displayName, displayNameValid, email, emailValid, password, passwordValid, handleChange, isValidForm } = useForm({ displayName: '', email: '', password: '' }, FORM_VALIDATE)
   const [isHandleSubmit, setIsHandleSubmit] = useState(false)
+  const dispatch = useDispatch()
+  const { status, errorMessage } = useSelector(state => state.auth)
+  const isCheckingAuthentication = useMemo(() => status === AUTH_STATUS.authChecking, [status])
   const handleSubmit = e => {
     e.preventDefault()
     setIsHandleSubmit(true)
-    if (isValidForm) return 'Enviar formulario'
+    if (!isValidForm) return
+    dispatch(createUserWithEmailPassword(email, password, displayName))
   }
   return (
     <FormLayout title='Registro' onSubmit={handleSubmit}>
-      {JSON.stringify(isHandleSubmit.current)}
       <Grid xs={12}>
         <TextField
           placeholder='Pepito de los Palotes'
@@ -64,9 +70,11 @@ export function RegisterPage () {
           fullWidth
           variant='contained'
           type='submit'
+          disabled={isCheckingAuthentication}
         >
           Registrar
         </Button>
+        {errorMessage && <Alert sx={{ mt: 1 }} severity='warning'>{errorMessage}</Alert>}
       </Grid>
       <Grid>
         <Typography component='strong' sx={{ mr: 1 }}>¿Ya se encuentra registrado?</Typography>

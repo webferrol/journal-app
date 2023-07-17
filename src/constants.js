@@ -17,6 +17,7 @@ export const AUTH_INITIAL_STATE = {
 
 export const ERRORS = {
   'auth/popup-closed-by-user': 'Ventana modal cerrada por el usuario',
+  'auth/email-already-in-use': 'El correo electrónico ya está en uso',
   undefined: 'Error desconocido'
 }
 
