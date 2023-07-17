@@ -16,7 +16,7 @@ import { AUTH_STATUS } from '../../constants'
 export function LoginPage () {
   const dispatch = useDispatch()
   const { status, errorMessage } = useSelector(state => state.auth)
-  const isAuthenticated = useMemo(() => status === AUTH_STATUS.authAuthenticated, [status])
+  const isAuthenticated = useMemo(() => status === AUTH_STATUS.authAuthenticated || status === AUTH_STATUS.authChecking, [status])
   useTitle('Login')
   const handleSubmit = e => {
     e.preventDefault()
@@ -70,8 +70,8 @@ export function LoginPage () {
           <Google />
           <Typography sx={{ ml: 1 }}>Google</Typography>
         </Button>
-        {errorMessage && <Alert sx={{ mt: 1 }} severity='warning'>{errorMessage}</Alert>}
       </Grid>
+      {errorMessage && <Grid xs={12}><Alert severity='warning'>{errorMessage}</Alert></Grid>}
       <Grid>
         <Link component={RouterLink} to='/auth/register'>Registro</Link>
       </Grid>

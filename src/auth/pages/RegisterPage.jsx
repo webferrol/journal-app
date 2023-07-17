@@ -17,7 +17,7 @@ export function RegisterPage () {
   const [isHandleSubmit, setIsHandleSubmit] = useState(false)
   const dispatch = useDispatch()
   const { status, errorMessage } = useSelector(state => state.auth)
-  const isCheckingAuthentication = useMemo(() => status === AUTH_STATUS.authChecking, [status])
+  const isAuthenticated = useMemo(() => status === AUTH_STATUS.authAuthenticated || status === AUTH_STATUS.authChecking, [status])
   const handleSubmit = e => {
     e.preventDefault()
     setIsHandleSubmit(true)
@@ -70,7 +70,7 @@ export function RegisterPage () {
           fullWidth
           variant='contained'
           type='submit'
-          disabled={isCheckingAuthentication}
+          disabled={isAuthenticated}
         >
           Registrar
         </Button>

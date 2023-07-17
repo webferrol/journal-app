@@ -8,13 +8,13 @@ export const authSlice = createSlice({
     setStatus: (state, action) => {
       state.status = action.payload // Estado del usuario durante el logueo
     },
-    setUser: (state, action) => {
-      state.status = AUTH_STATUS.authAuthenticated
-      state.user = action.payload
-      state.errorMessage = ''
-    },
     setErrorMessage: (state, action) => {
       state.errorMessage = action.payload
+    },
+    login: (state, action) => {
+      state.errorMessage = ''
+      state.user = action.payload
+      state.status = AUTH_STATUS.authAuthenticated
     },
     logout: (state, action) => {
       state.status = AUTH_STATUS.authNotAuthenticated
@@ -24,4 +24,4 @@ export const authSlice = createSlice({
   }
 })
 
-export const { setIsLoading, setStatus, setUser, setErrorMessage, logout } = authSlice.actions
+export const { setStatus, setErrorMessage, logout, login } = authSlice.actions

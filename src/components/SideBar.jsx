@@ -12,7 +12,8 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import PropTypes from 'prop-types'
 
-export function SideBar ({ drawerWidth = 240 }) {
+export function SideBar ({ drawerWidth = 240, dataUser }) {
+  const { status, user } = dataUser
   return (
     <Grid
       container
@@ -38,7 +39,7 @@ export function SideBar ({ drawerWidth = 240 }) {
             variant='h6'
             noWrap
           >
-            Xurxo González
+            {status && user?.displayName}
           </Typography>
         </Toolbar>
         <Divider />
@@ -58,5 +59,6 @@ export function SideBar ({ drawerWidth = 240 }) {
 }
 
 SideBar.propTypes = {
-  drawerWidth: PropTypes.number
+  drawerWidth: PropTypes.number,
+  dataUser: PropTypes.object
 }
