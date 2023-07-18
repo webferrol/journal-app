@@ -16,6 +16,7 @@ export function FormLayout ({ title, children, onSubmit }) {
         sx={{ backgroundColor: 'white', p: 2, maxWidth: 'sm', borderRadius: 2 }}
         spacing={3}
         justifyContent='end'
+        className='animate__animated animate__zoomIn'
       >
         <Grid xs={12}>
           <Typography variant='h5' element='h2'>{title}</Typography>

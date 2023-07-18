@@ -21,7 +21,10 @@ export const ERRORS = {
   'auth/wrong-password': 'Password incorrecto',
   'auth/user-not-found': 'Usuario no encontrado',
   'auth/too-many-requests': 'Demasiados intentos',
-  'auth/undefined': 'Error desconocido'
+  'auth/undefined': 'Error desconocido',
+  'fr/permission-denied': 'Permiso denegado',
+  'permission-denied': 'Permiso denegado',
+  'invalid-argument': 'Argumento no válido'
 }
 
 export const FORM_VALIDATE = {
