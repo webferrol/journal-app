@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import { useTitle } from '../../hooks/useTitle'
 import Alert from '@mui/material/Alert'
 import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
 import Google from '@mui/icons-material/Google'
 import Grid from '@mui/material/Unstable_Grid2'
 import Link from '@mui/material/Link'
@@ -69,7 +70,7 @@ export function LoginPage () {
           onClick={handleGoogle}
           disabled={isAuthenticated}
         >
-          <Google />
+          {status === AUTH_STATUS.authChecking ? <CircularProgress color='inherit' size='1rem' /> : <Google />}
           <Typography sx={{ ml: 1 }}>Google</Typography>
         </Button>
       </Grid>

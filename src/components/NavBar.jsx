@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux'
+import Avatar from '@mui/material/Avatar'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
@@ -5,12 +7,12 @@ import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import MenuOutlined from '@mui/icons-material/MenuOutlined'
 import Typography from '@mui/material/Typography'
-import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
 import { signOut } from '../auth/slices'
+import PropTypes from 'prop-types'
 
-export function NavBar ({ drawerWidth = 240 }) {
+export function NavBar ({ drawerWidth = 240, dataUser }) {
   const dispatch = useDispatch()
+  const { status, user } = dataUser
   return (
     <AppBar
       position='fixed'
@@ -38,7 +40,11 @@ export function NavBar ({ drawerWidth = 240 }) {
             Webferrol
           </Typography>
           <IconButton color='inherit' onClick={() => dispatch(signOut())}>
-            <AccountCircle />
+            {
+              status && user?.photoURL
+                ? <Avatar alt={user.displayName} src={user.photoURL} />
+                : <AccountCircle />
+            }
           </IconButton>
         </Grid>
       </Toolbar>
@@ -47,5 +53,6 @@ export function NavBar ({ drawerWidth = 240 }) {
 }
 
 NavBar.propTypes = {
-  drawerWidth: PropTypes.number
+  drawerWidth: PropTypes.number,
+  dataUser: PropTypes.object
 }

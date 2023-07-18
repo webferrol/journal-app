@@ -14,7 +14,7 @@ export function AppLayout () {
       container
       alignItems='start'
     >
-      <NavBar drawerWidth={240} />
+      <NavBar drawerWidth={240} dataUser={{ user, status }} />
       {/* NavBar position: fixed */}
       <SideBar drawerWidth={240} dataUser={{ user, status }} />
       <Box
