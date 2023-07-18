@@ -1,20 +1,22 @@
-import { addDoc, collection } from 'firebase/firestore'
-import { db } from '../../firebase/firebase'
-import { setIsSaving, setWorkExperience } from './portfolioSlice'
+import { addDocument } from '../../firebase'
+import { ERRORS } from '../../constants'
+import { setErrorMessage, setIsSaving, setWorkExperience } from './portfolioSlice'
 export function addWorkExperience () {
   return async (dispatch, getState) => {
-    // console.log(getState())
+    dispatch(setIsSaving(true))
     const { auth: { user: { uid } } } = getState()
-    if (uid) {
-      dispatch(setIsSaving(true))
-      const data = {
-        uid,
-        title: 'Prueba',
-        date: new Date().getTime()
-      }
-      const { id: idDoc } = await addDoc(collection(db, `users/${uid}/experiences`), data)
-      dispatch(setWorkExperience({ idDoc, ...data }))
-      dispatch(setIsSaving(false))
+    if (!uid) {
+      dispatch(setErrorMessage(ERRORS['fr/permission-denied']))
+      return dispatch(setIsSaving(false))
     }
+    const data = {
+      uid,
+      title: 'Prueba',
+      date: new Date().getTime()
+    }
+    const { ok, idDoc, errorMessage } = await addDocument(`users/${uid}/experiences`, data)
+    if (ok) dispatch(setWorkExperience({ idDoc, ...data }))
+    else dispatch(setErrorMessage(errorMessage ?? ERRORS['fr/permission-denied']))
+    dispatch(setIsSaving(false))
   }
 }
