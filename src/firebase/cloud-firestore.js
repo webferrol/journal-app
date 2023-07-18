@@ -1,4 +1,4 @@
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, getDocs } from 'firebase/firestore'
 import { db } from './firebase'
 import { ERRORS } from '../constants'
 
@@ -19,8 +19,35 @@ export const addDocument = async (uid, data) => {
       data
     }
   } catch (error) {
-    const { code } = error
+    const { code = 'auth/undefined' } = error
     console.log(code)
+    return {
+      ok: false,
+      errorMessage: ERRORS[code]
+    }
+  }
+}
+
+/**
+ *
+ * @param {string} uid ruta firestore de donde quiero bajar los datos. Puede ser un documento, una colección ...
+ * @returns {array} de objetos donde estan almacenados los datos
+ */
+export const getDocuments = async (uid) => {
+  try {
+    const querySnapshot = await getDocs(collection(db, uid))
+    if (!querySnapshot.size) return { ok: true, data: [] }
+    const tmp = []
+    querySnapshot.forEach((doc) => {
+      tmp.push({
+        idDoc: doc.id,
+        ...doc.data() // DESTRUCTURING
+      })
+    })
+    return { ok: true, data: tmp }
+  } catch (error) {
+    console.log('cloud-firestore ❤️❤️❤️', error)
+    const { code = 'auth/undefined' } = error
     return {
       ok: false,
       errorMessage: ERRORS[code]

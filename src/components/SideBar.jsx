@@ -12,7 +12,7 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import PropTypes from 'prop-types'
 
-export function SideBar ({ drawerWidth = 240, dataUser }) {
+export function SideBar ({ drawerWidth = 240, dataUser, experiences = [] }) {
   const { status, user } = dataUser
   return (
     <Grid
@@ -44,14 +44,18 @@ export function SideBar ({ drawerWidth = 240, dataUser }) {
         </Toolbar>
         <Divider />
         <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <CommentIcon />
-              </ListItemIcon>
-              <ListItemText primary='Uno' secondary='Lorem ipsum mola' />
-            </ListItemButton>
-          </ListItem>
+          {
+            experiences?.map(({ idDoc, title }) => (
+              <ListItem disablePadding key={idDoc}>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <CommentIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={title} secondary='Lorem ipsum mola' />
+                </ListItemButton>
+              </ListItem>
+            ))
+          }
         </List>
       </Drawer>
     </Grid>
@@ -60,5 +64,6 @@ export function SideBar ({ drawerWidth = 240, dataUser }) {
 
 SideBar.propTypes = {
   drawerWidth: PropTypes.number,
-  dataUser: PropTypes.object
+  dataUser: PropTypes.object,
+  experiences: PropTypes.array
 }

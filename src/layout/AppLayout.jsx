@@ -9,6 +9,7 @@ import { FloatingButton } from '../components/FloatingButton'
 
 export function AppLayout () {
   const { status, user } = useSelector(state => state.auth)
+  const { workExperiences } = useSelector(state => state.portfolio)
   return (
     <Grid
       container
@@ -16,7 +17,7 @@ export function AppLayout () {
     >
       <NavBar drawerWidth={240} dataUser={{ user, status }} />
       {/* NavBar position: fixed */}
-      <SideBar drawerWidth={240} dataUser={{ user, status }} />
+      <SideBar drawerWidth={240} dataUser={{ user, status }} experiences={workExperiences} />
       <Box
         component='main'
         sx={{ flexGrow: 1, p: 3 }}

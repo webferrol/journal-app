@@ -1,6 +1,6 @@
-import { addDocument } from '../../firebase'
+import { addDocument, getDocuments } from '../../firebase'
 import { ERRORS } from '../../constants'
-import { setErrorMessage, setIsSaving, setWorkExperience } from './portfolioSlice'
+import { setErrorMessage, setIsSaving, setWorkExperience, setWorkExperiences } from './portfolioSlice'
 export function addWorkExperience () {
   return async (dispatch, getState) => {
     dispatch(setIsSaving(true))
@@ -18,5 +18,13 @@ export function addWorkExperience () {
     if (ok) dispatch(setWorkExperience({ idDoc, ...data }))
     else dispatch(setErrorMessage(errorMessage ?? ERRORS['fr/permission-denied']))
     dispatch(setIsSaving(false))
+  }
+}
+
+export function loadExperiencesDocs (uid) {
+  return async (dispatch) => {
+    const { ok, data, errorMessage } = await getDocuments(`users/${uid}/experiences`)
+    if (!ok) return dispatch(setErrorMessage(errorMessage))
+    dispatch(setWorkExperiences(data))
   }
 }

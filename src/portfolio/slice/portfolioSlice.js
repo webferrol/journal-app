@@ -19,8 +19,11 @@ export const portfolioSlice = createSlice({
     },
     getWorkExperiences: (state, action) => {
 
+    },
+    setWorkExperiences: (state, action) => {
+      state.workExperiences = action.payload
     }
   }
 })
 
-export const { setWorkExperience, getWorkExperiences, setErrorMessage, setIsSaving } = portfolioSlice.actions
+export const { setWorkExperience, getWorkExperiences, setErrorMessage, setIsSaving, setWorkExperiences } = portfolioSlice.actions
