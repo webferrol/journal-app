@@ -11,8 +11,10 @@ import { useForm } from '../../hooks/useForm'
 import { FormLayout } from '../layout/FormLayout'
 import { AUTH_STATUS, FORM_VALIDATE } from '../../constants'
 import { createUserWithEmailPassword } from '../slices/thunks'
+import { useTitle } from '../../hooks'
 
 export function RegisterPage () {
+  useTitle('Registro de usuario')
   const { displayName, displayNameValid, email, emailValid, password, passwordValid, handleChange, isValidForm } = useForm({ displayName: '', email: '', password: '' }, FORM_VALIDATE)
   const [isHandleSubmit, setIsHandleSubmit] = useState(false)
   const dispatch = useDispatch()

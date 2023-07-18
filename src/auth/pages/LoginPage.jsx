@@ -14,10 +14,12 @@ import { signInWithPopup, signInWithEmailAndPassword } from '../slices'
 import { AUTH_STATUS } from '../../constants'
 
 export function LoginPage () {
+  useTitle('Login')
   const dispatch = useDispatch()
   const { status, errorMessage } = useSelector(state => state.auth)
-  const isAuthenticated = useMemo(() => status === AUTH_STATUS.authAuthenticated || status === AUTH_STATUS.authChecking, [status])
-  useTitle('Login')
+  const isAuthenticated = useMemo(
+    () => status === AUTH_STATUS.authAuthenticated || status === AUTH_STATUS.authChecking,
+    [status])
   const handleSubmit = e => {
     e.preventDefault()
     const formData = new FormData(e.target)
