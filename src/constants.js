@@ -27,7 +27,7 @@ export const ERRORS = {
   'permission-denied': 'Permiso denegado'
 }
 
-export const FORM_VALIDATE = {
+export const REGISTER_FORM_VALIDATE = {
   displayName: { fn: (value) => (!value.trim().length), message: 'Este campo es obligatorio' },
   password: { fn: (value) => (value.trim().length < 6), message: 'Por lo menos 6 caracteres' },
   email: { fn: (value) => !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value), message: 'Correo electrónico no válido' }

@@ -5,7 +5,8 @@ export const portfolioSlice = createSlice({
   initialState: {
     isSaving: false,
     errorMessage: '',
-    workExperiences: []
+    workExperiences: [],
+    workExperienceActive: null
   },
   reducers: {
     setIsSaving: (state, action) => {
@@ -16,14 +17,23 @@ export const portfolioSlice = createSlice({
     },
     setWorkExperience: (state, action) => {
       state.workExperiences.push(action.payload)
-    },
-    getWorkExperiences: (state, action) => {
-
+      state.workExperienceActive = action.payload
     },
     setWorkExperiences: (state, action) => {
       state.workExperiences = action.payload
+    },
+    setWorkExperienceActive: (state, action) => {
+      state.workExperienceActive = action.payload
+    },
+    selectWorkExperienceActive: (state, action) => {
+      state.workExperienceActive = state.workExperiences.find(({ idDoc }) => idDoc === action.payload)
+    },
+    updateWorkExperienceActive: (state, action) => {
+      const index = state.workExperiences.findIndex(item => item.idDoc === action.payload.idDoc)
+      state.workExperiences[index] = action.payload
+      state.workExperienceActive = action.payload
     }
   }
 })
 
-export const { setWorkExperience, getWorkExperiences, setErrorMessage, setIsSaving, setWorkExperiences } = portfolioSlice.actions
+export const { selectWorkExperienceActive, setWorkExperience, setWorkExperienceActive, setErrorMessage, setIsSaving, setWorkExperiences, updateWorkExperienceActive } = portfolioSlice.actions

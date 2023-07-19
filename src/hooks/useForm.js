@@ -35,6 +35,13 @@ export function useForm (initialFormControlsValue = {}, initialFormControlsValid
     [createFieldFormControlsValidation, formControls]
   )
 
+  useEffect(
+    () => {
+      setFormControls(initialFormControlsValue)
+    },
+    [initialFormControlsValue]
+  )
+
   const reset = () => {
     setFormControls(initialFormControlsValue)
   }

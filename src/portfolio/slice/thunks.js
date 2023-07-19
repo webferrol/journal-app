@@ -1,6 +1,6 @@
-import { addDocument, getDocuments } from '../../firebase'
+import { addDocument, getDocuments, updateDocument } from '../../firebase'
 import { ERRORS } from '../../constants'
-import { setErrorMessage, setIsSaving, setWorkExperience, setWorkExperiences } from './portfolioSlice'
+import { setErrorMessage, setIsSaving, setWorkExperience, setWorkExperiences, updateWorkExperienceActive } from './portfolioSlice'
 export function addWorkExperience () {
   return async (dispatch, getState) => {
     dispatch(setIsSaving(true))
@@ -12,6 +12,7 @@ export function addWorkExperience () {
     const data = {
       uid,
       title: 'Prueba',
+      description: '',
       date: new Date().getTime()
     }
     const { ok, idDoc, errorMessage } = await addDocument(`users/${uid}/experiences`, data)
@@ -26,5 +27,14 @@ export function loadExperiencesDocs (uid) {
     const { ok, data, errorMessage } = await getDocuments(`users/${uid}/experiences`)
     if (!ok) return dispatch(setErrorMessage(errorMessage))
     dispatch(setWorkExperiences(data))
+  }
+}
+
+export function updateWorkExperience (uid, data) {
+  const { title, description } = data
+  return async (dispatch) => {
+    const { ok, errorMessage } = await updateDocument(`users/${uid}/experiences`, data?.idDoc, { title, description })
+    if (!ok) return dispatch(setErrorMessage(errorMessage))
+    dispatch(updateWorkExperienceActive(data))
   }
 }

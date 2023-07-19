@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs } from 'firebase/firestore'
+import { addDoc, collection, doc, getDocs, updateDoc } from 'firebase/firestore'
 import { db } from './firebase'
 import { ERRORS } from '../constants'
 
@@ -51,6 +51,27 @@ export const getDocuments = async (uid) => {
     return {
       ok: false,
       errorMessage: ERRORS[code]
+    }
+  }
+}
+
+/**
+ * Función que actualiza la información de un documento parcial o completo de firestore db
+ *
+ * @param {string} collection Una colección o ruta de colección. Ejemplo: users/xurxo/experiencias
+ * @param {string} uid optiene la uid o identificador del documento
+ * @param {Object} data
+ */
+export const updateDocument = async (collection, uid, data = {}) => {
+  try {
+    await updateDoc(doc(db, collection, uid), data)
+    return {
+      ok: true
+    }
+  } catch (error) {
+    return {
+      ok: false,
+      errorMessage: error.message
     }
   }
 }
