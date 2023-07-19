@@ -87,7 +87,7 @@ export async function _signInWithEmailAndPassword (emailValue, passwordValue) {
       photoURL
     }
   } catch (error) {
-    console.log(error.message)
+    console.log(error)
     const { code = 'auth/undefined' } = error
     return {
       ok: false,

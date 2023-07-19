@@ -5,7 +5,7 @@ export const AUTH_STATUS = {
 }
 
 export const AUTH_INITIAL_STATE = {
-  status: AUTH_STATUS.authChecking,
+  status: AUTH_STATUS.authNotAuthenticated,
   errorMessage: '',
   user: {
     uid: null,
@@ -16,15 +16,15 @@ export const AUTH_INITIAL_STATE = {
 }
 
 export const ERRORS = {
-  'auth/popup-closed-by-user': 'Ventana modal cerrada por el usuario',
   'auth/email-already-in-use': 'El correo electrónico ya está en uso',
-  'auth/wrong-password': 'Password incorrecto',
-  'auth/user-not-found': 'Usuario no encontrado',
+  'auth/popup-closed-by-user': 'Ventana modal cerrada por el usuario',
   'auth/too-many-requests': 'Demasiados intentos',
   'auth/undefined': 'Error desconocido',
+  'auth/user-not-found': 'Usuario no encontrado',
+  'auth/wrong-password': 'Password incorrecto',
   'fr/permission-denied': 'Permiso denegado',
-  'permission-denied': 'Permiso denegado',
-  'invalid-argument': 'Argumento no válido'
+  'invalid-argument': 'Argumento no válido',
+  'permission-denied': 'Permiso denegado'
 }
 
 export const FORM_VALIDATE = {

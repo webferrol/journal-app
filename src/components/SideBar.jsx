@@ -1,15 +1,10 @@
-import CommentIcon from '@mui/icons-material/Comment'
 import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'
 import Grid from '@mui/material/Grid'
 import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemButton from '@mui/material/ListItemButton'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+import { ListItemPortfolio } from '../portfolio/components'
 import PropTypes from 'prop-types'
 
 export function SideBar ({ drawerWidth = 240, dataUser, experiences = [] }) {
@@ -45,15 +40,8 @@ export function SideBar ({ drawerWidth = 240, dataUser, experiences = [] }) {
         <Divider />
         <List>
           {
-            experiences?.map(({ idDoc, title }) => (
-              <ListItem disablePadding key={idDoc}>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <CommentIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={title} secondary='Lorem ipsum mola' />
-                </ListItemButton>
-              </ListItem>
+            experiences?.map(item => (
+              <ListItemPortfolio key={item.idDoc} {...item} />
             ))
           }
         </List>

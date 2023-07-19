@@ -12,6 +12,7 @@ export const authSlice = createSlice({
       state.errorMessage = action.payload
     },
     login: (state, action) => {
+      state.status = AUTH_STATUS.authChecking
       state.errorMessage = ''
       state.user = action.payload
       state.status = AUTH_STATUS.authAuthenticated
