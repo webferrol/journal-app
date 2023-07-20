@@ -1,19 +1,35 @@
-import { useMemo } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@mui/material/Unstable_Grid2'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import SaveIcon from '@mui/icons-material/Save'
-import { TextField } from '@mui/material'
+import TextField from '@mui/material/TextField'
+import Alert from '@mui/material/Alert'
+import { DialogPortfolio } from '../portfolio/components'
 import { useForm } from '../hooks'
+import { setSaveMessage, updateWorkExperience } from '../portfolio/slice'
 import PropTypes from 'prop-types'
-import { updateWorkExperience } from '../portfolio/slice'
 
 export function NoteView ({ form }) {
+  const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch()
+  const { errorMessage, isSaving, saveMessage } = useSelector(state => state.portfolio)
   const { title, description, handleChange } = useForm(form)
 
+  useEffect(() => {
+    if (saveMessage.length) {
+      setShowModal(true)
+    }
+  }, [saveMessage])
+
+  const handleClose = () => {
+    dispatch(setSaveMessage(''))
+    setShowModal(false)
+  }
+
   const date = useMemo(() => new Date(form?.date).toLocaleDateString(), [form?.date])
+  const isError = useMemo(() => Boolean(errorMessage), [errorMessage])
   const handleSubmit = e => {
     e.preventDefault()
     const { target } = e
@@ -51,6 +67,7 @@ export function NoteView ({ form }) {
           name='title'
           value={title}
           onChange={handleChange}
+          error={isError}
         />
       </Grid>
       <Grid xs={12}>
@@ -65,10 +82,13 @@ export function NoteView ({ form }) {
           name='description'
           value={description}
           onChange={handleChange}
+          error={isError}
         />
       </Grid>
       <Grid xs={12}>
-        <Button type='submit' variant='outlined' startIcon={<SaveIcon />}>Guardar</Button>
+        <Button type='submit' disabled={isError || isSaving} variant='outlined' startIcon={<SaveIcon />}>Guardar</Button>
+        {isError && <Alert sx={{ mt: 1 }} severity='warning'>{errorMessage}</Alert>}
+        {showModal && <DialogPortfolio onClose={handleClose} message={saveMessage} />}
       </Grid>
     </Grid>
   )

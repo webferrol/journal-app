@@ -4,6 +4,7 @@ export const portfolioSlice = createSlice({
   name: 'portfolio',
   initialState: {
     isSaving: false,
+    saveMessage: '',
     errorMessage: '',
     workExperiences: [],
     workExperienceActive: null
@@ -11,6 +12,9 @@ export const portfolioSlice = createSlice({
   reducers: {
     setIsSaving: (state, action) => {
       state.isSaving = action.payload
+    },
+    setSaveMessage: (state, action) => {
+      state.saveMessage = action.payload
     },
     setErrorMessage: (state, action) => {
       state.errorMessage = action.payload
@@ -29,11 +33,16 @@ export const portfolioSlice = createSlice({
       state.workExperienceActive = state.workExperiences.find(({ idDoc }) => idDoc === action.payload)
     },
     updateWorkExperienceActive: (state, action) => {
+      state.errorMessage = ''
       const index = state.workExperiences.findIndex(item => item.idDoc === action.payload.idDoc)
-      state.workExperiences[index] = action.payload
-      state.workExperienceActive = action.payload
+      if (index > -1) {
+        state.workExperiences[index] = action.payload
+        state.workExperienceActive = action.payload
+        state.saveMessage = `Se ha guardado correctamente la experiencia ${action.payload.title}`
+      }
+      state.isSaving = false
     }
   }
 })
 
-export const { selectWorkExperienceActive, setWorkExperience, setWorkExperienceActive, setErrorMessage, setIsSaving, setWorkExperiences, updateWorkExperienceActive } = portfolioSlice.actions
+export const { selectWorkExperienceActive, setWorkExperience, setSaveMessage, setWorkExperienceActive, setErrorMessage, setIsSaving, setWorkExperiences, updateWorkExperienceActive } = portfolioSlice.actions

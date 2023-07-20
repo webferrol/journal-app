@@ -33,8 +33,12 @@ export function loadExperiencesDocs (uid) {
 export function updateWorkExperience (uid, data) {
   const { title, description } = data
   return async (dispatch) => {
+    dispatch(setIsSaving(true))
     const { ok, errorMessage } = await updateDocument(`users/${uid}/experiences`, data?.idDoc, { title, description })
-    if (!ok) return dispatch(setErrorMessage(errorMessage))
+    if (!ok) {
+      dispatch(setErrorMessage(errorMessage))
+      return dispatch(setIsSaving(false))
+    }
     dispatch(updateWorkExperienceActive(data))
   }
 }
