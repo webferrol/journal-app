@@ -1,7 +1,7 @@
 import * as React from 'react'
-import Link from '@mui/material/Link'
 import SvgIcon from '@mui/material/SvgIcon'
 import Typography from '@mui/material/Typography'
+import PropTypes from 'prop-types'
 
 function LightBulbIcon (props) {
   return (
@@ -11,11 +11,15 @@ function LightBulbIcon (props) {
   )
 }
 
-export default function ProTip () {
+export default function ProTip ({ children }) {
   return (
     <Typography sx={{ mt: 6, mb: 3 }} color='text.secondary'>
       <LightBulbIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
-      Consejo: Selecciona una nueva <Link href='https://mui.com/getting-started/templates/'>entrada</Link>.
+      {children}
     </Typography>
   )
+}
+
+ProTip.propTypes = {
+  children: PropTypes.node
 }

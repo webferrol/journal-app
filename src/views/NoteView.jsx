@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@mui/material/Unstable_Grid2'
 import Typography from '@mui/material/Typography'
@@ -10,9 +10,11 @@ import { DialogPortfolio } from '../portfolio/components'
 import { useForm } from '../hooks'
 import { setSaveMessage, updateWorkExperience } from '../portfolio/slice'
 import PropTypes from 'prop-types'
+import { IconButton } from '@mui/material'
 
 export function NoteView ({ form }) {
   const [showModal, setShowModal] = useState(false)
+  const inputFileRef = useRef()
   const dispatch = useDispatch()
   const { errorMessage, isSaving, saveMessage } = useSelector(state => state.portfolio)
   const { title, description, handleChange } = useForm(form)
@@ -26,6 +28,12 @@ export function NoteView ({ form }) {
   const handleClose = () => {
     dispatch(setSaveMessage(''))
     setShowModal(false)
+  }
+
+  const handleFileInput = ({ target }) => {
+    const { length = 0 } = target.files
+    if (!length) return
+    console.log('Ahí imos')
   }
 
   const date = useMemo(() => new Date(form?.date).toLocaleDateString(), [form?.date])
@@ -87,6 +95,18 @@ export function NoteView ({ form }) {
       </Grid>
       <Grid xs={12}>
         <Button type='submit' disabled={isError || isSaving} variant='outlined' startIcon={<SaveIcon />}>Guardar</Button>
+        <IconButton onClick={() => inputFileRef.current.click()}>
+          <SaveIcon />
+          <input
+            type='file'
+            style={{ display: 'none' }}
+            ref={inputFileRef}
+            onChange={handleFileInput}
+            multiple
+          />
+        </IconButton>
+      </Grid>
+      <Grid xs={12}>
         {isError && <Alert sx={{ mt: 1 }} severity='warning'>{errorMessage}</Alert>}
         {showModal && <DialogPortfolio onClose={handleClose} message={saveMessage} />}
       </Grid>
